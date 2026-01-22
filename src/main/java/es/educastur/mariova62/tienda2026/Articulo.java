@@ -14,7 +14,12 @@ public class Articulo {
     private int exustencias;
     private double pvp;
 
-    
+    public Articulo(String idArticulo, String descripcion, int exustencias, double pvp) {
+        this.idArticulo = idArticulo;
+        this.descripcion = descripcion;
+        this.exustencias = exustencias;
+        this.pvp = pvp;
+    }
 
     public void setIdArticulo(String idArticulo) {
         this.idArticulo = idArticulo;
@@ -48,14 +53,14 @@ public class Articulo {
         return pvp;
     }
 
-    public Articulo(String idArticulo, String descripcion, int exustencias, double pvp) {
-        this.idArticulo = idArticulo;
-        this.descripcion = descripcion;
-        this.exustencias = exustencias;
-        this.pvp = pvp;
-    }
+    
 @Override
     public String toString() {
-        return "Articulo{" + "idArticulo=" + idArticulo + ", descripcion=" + descripcion + ", exustencias=" + exustencias + ", pvp=" + pvp + '}';
+        return  idArticulo + " - " + descripcion + " - " + exustencias + " (" + pvp + ") ";
     }
+    
+
+
+
+
 }

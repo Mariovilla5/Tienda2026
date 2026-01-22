@@ -14,6 +14,14 @@ public class Cliente {
     private String telefono;      
     private String email;
 
+    
+    public Cliente(String idCliente, String nombre, String telefono, String email) {
+        this.idCliente = idCliente;
+        this.nombre = nombre;
+        this.telefono = telefono;
+        this.email = email;
+    }
+    
     public void setIdCliente(String idCliente) {
         this.idCliente = idCliente;
     }
@@ -48,12 +56,7 @@ public class Cliente {
 
     
 
-    public Cliente(String idCliente, String nombre, String telefono, String email) {
-        this.idCliente = idCliente;
-        this.nombre = nombre;
-        this.telefono = telefono;
-        this.email = email;
-    }
+    
     @Override
         public String toString() {
             return "Cliente{" + "idCliente=" + idCliente + ", nombre=" + nombre + ", telefono=" + telefono + ", email=" + email + '}';
