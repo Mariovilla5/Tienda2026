@@ -55,20 +55,175 @@ public class Tienda2026 {
         pedidos.add(new Pedido("36347775R-002/2025", clientes.get("36347775R"), hoy.minusDays(5), new ArrayList<>(List.of(new LineaPedido("4-33", 3), new LineaPedido("2-11", 3)))));
         pedidos.add(new Pedido("63921307Y-001/2025", clientes.get("63921307Y"), hoy.minusDays(4), new ArrayList<>(List.of(new LineaPedido("2-11", 5), new LineaPedido("2-33", 3), new LineaPedido("4-33", 2)))));
     }
+//<editor-fold defaultstate="collapsed" desc="MENUS">
 
-    public void menu() {
+    private void menu() {
+        int opcion = 0;
+        do {
+            System.out.println("\n\n\n\n\n\t\t\t\tMENU\n");
+            System.out.println("\t\t\t\t1 - MENU CLIENTES");
+            System.out.println("\t\t\t\t2 - MENU ARTICULOS");
+            System.out.println("\t\t\t\t3 - MENU PEDIDOS");
+            System.out.println("\t\t\t\t9 - SALIR");
+            System.out.print("Seleccione un apartado: ");
+            opcion=sc.nextInt();
+            switch (opcion) {
+                case 1: {
+                    menuClientes();
+                    break;
+                }
+                case 2: {
+                    menuArticulos();
+                    break;
+                }
+                case 3: {
+                    menuPedidos();
+                    break;
+                }
 
-        for (Articulo a : articulos.values()) {
-            System.out.println(a);
-        }
-        System.out.println("");
+            }
+        } while (opcion != 9);
+    }
+
+    private void menuClientes() {
+        int opcion = 0;
+        do {
+            System.out.println("\n\n\n\n\n\t\t\t\tMENU CLIENTES\n");
+            System.out.println("\t\t\t\t1 - ALTA");
+            System.out.println("\t\t\t\t2 - BAJA");
+            System.out.println("\t\t\t\t3 - MODIFICAR");
+            System.out.println("\t\t\t\t4 - LISTAR");
+            System.out.println("\t\t\t\t9 - SALIR");
+            System.out.print("Seleccione un apartado: ");
+            opcion=sc.nextInt();
+            switch (opcion) {
+                case 1: {
+                    altaClientes();
+                    break;
+                }
+                case 2: {
+                    bajaClientes();
+                    break;
+                }
+                case 3: {
+                    modificarClientes();
+                    break;
+                }
+                case 4: {
+                    listarClientes();
+                    break;
+                }
+
+            }
+        } while (opcion != 9);
+    }
+
+    private void menuArticulos() {
+        int opcion = 0;
+        do {
+            System.out.println("\n\n\n\n\n\t\t\t\tMENU ARTICULOS\n");
+            System.out.println("\t\t\t\t1 - ALTA");
+            System.out.println("\t\t\t\t2 - BAJA");
+            System.out.println("\t\t\t\t3 - MODIFICAR");
+            System.out.println("\t\t\t\t4 - LISTAR");
+            System.out.println("\t\t\t\t9 - SALIR");
+            System.out.print("Seleccione un apartado: ");
+            opcion=sc.nextInt();
+            switch (opcion) {
+                case 1: {
+                    altaArticulos();
+                    break;
+                }
+                case 2: {
+                    bajaArticulos();
+                    break;
+                }
+                case 3: {
+                    modificarArticulos();
+                    break;
+                }
+                case 4: {
+                    listarArticulos();
+                    break;
+                }
+
+            }
+
+        } while (opcion != 9);
+    }
+
+    private void menuPedidos() {
+        int opcion = 0;
+        do {
+            System.out.println("\n\n\n\n\n\t\t\t\tMENU PEDIDOS\n");
+            System.out.println("\t\t\t\t1 - LISTADO PEDIDOS");
+            System.out.println("\t\t\t\t2 - NUEVO PEDIDO");
+            System.out.println("\t\t\t\t9 - SALIR");
+            System.out.print("Seleccione un apartado: ");
+            opcion=sc.nextInt();
+            switch (opcion) {
+                case 1: {
+                    listadoPedidos();
+                    break;
+                }
+                case 2: {
+                    nuevoPedido();
+                    break;
+                }
+
+            }
+
+        } while (opcion != 9);
+    }
+//</editor-fold>
+
+//<editor-fold defaultstate="collapsed" desc="CLIENTES">
+    private void altaClientes() {
+    }
+
+    private void bajaClientes() {
+    }
+
+    private void modificarClientes() {
+    }
+
+    private void listarClientes() {
+        System.out.println("Listado de Clientes");
         for (Cliente c : clientes.values()) {
             System.out.println(c);
         }
-        System.out.println("");
-        for (String dni : clientes.keySet()) {
-            System.out.println(dni);
-        }
-        
     }
+//</editor-fold>
+    
+//<editor-fold defaultstate="collapsed" desc="ARTICULOS">
+    private void altaArticulos() {
+
+    }
+
+    private void bajaArticulos() {
+    }
+
+    private void modificarArticulos() {
+    }
+
+    private void listarArticulos() {
+        System.out.println("Listado de Articulos");
+        for (Articulo a : articulos.values()) {
+            System.out.println(a);
+        }
+    }
+//</editor-fold>
+    
+//<editor-fold defaultstate="collapsed" desc="PEDIDOS">
+    private void listadoPedidos() {
+        System.out.println("Listado de Pedidos");
+        for (Pedido p : pedidos) {
+            System.out.println(p);
+        }
+    }
+
+    private void nuevoPedido() {
+    }
+//</editor-fold>
+    
 }
