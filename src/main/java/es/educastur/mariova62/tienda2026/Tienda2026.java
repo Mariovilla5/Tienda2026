@@ -66,7 +66,7 @@ public class Tienda2026 {
             System.out.println("\t\t\t\t3 - MENU PEDIDOS");
             System.out.println("\t\t\t\t9 - SALIR");
             System.out.print("Seleccione un apartado: ");
-            opcion=sc.nextInt();
+            opcion = sc.nextInt();
             switch (opcion) {
                 case 1: {
                     menuClientes();
@@ -95,7 +95,7 @@ public class Tienda2026 {
             System.out.println("\t\t\t\t4 - LISTAR");
             System.out.println("\t\t\t\t9 - SALIR");
             System.out.print("Seleccione un apartado: ");
-            opcion=sc.nextInt();
+            opcion = sc.nextInt();
             switch (opcion) {
                 case 1: {
                     altaClientes();
@@ -128,7 +128,7 @@ public class Tienda2026 {
             System.out.println("\t\t\t\t4 - LISTAR");
             System.out.println("\t\t\t\t9 - SALIR");
             System.out.print("Seleccione un apartado: ");
-            opcion=sc.nextInt();
+            opcion = sc.nextInt();
             switch (opcion) {
                 case 1: {
                     altaArticulos();
@@ -160,7 +160,7 @@ public class Tienda2026 {
             System.out.println("\t\t\t\t2 - NUEVO PEDIDO");
             System.out.println("\t\t\t\t9 - SALIR");
             System.out.print("Seleccione un apartado: ");
-            opcion=sc.nextInt();
+            opcion = sc.nextInt();
             switch (opcion) {
                 case 1: {
                     listadoPedidos();
@@ -194,10 +194,34 @@ public class Tienda2026 {
         }
     }
 //</editor-fold>
-    
+
 //<editor-fold defaultstate="collapsed" desc="ARTICULOS">
     private void altaArticulos() {
 
+        String idArticulo, descripcion, existencias, pvp;
+
+        System.out.println("ALTA DE NUEVO ARTICULO");
+
+        do {
+            System.out.println("IdArticulo (IDENTIFICADOR)");
+            idArticulo = sc.nextLine();
+        } while (!idArticulo.matches("[1-5][-][0-9][0-9]") || articulos.containsKey(idArticulo));
+
+        System.out.println("DESCRIPCION:");
+        descripcion = sc.nextLine();
+
+        do {
+            System.out.println("EXISTENCIAS:");
+            existencias = sc.nextLine();
+        } while (!MetodosAuxiliares.esInt(existencias));
+
+        do {
+            System.out.println("PVP:");
+            pvp = sc.nextLine();
+        } while (!MetodosAuxiliares.esDouble(pvp));
+
+        Articulo a = new Articulo(idArticulo, descripcion, Integer.parseInt(existencias), Double.parseDouble(pvp));
+        articulos.put(idArticulo, a);
     }
 
     private void bajaArticulos() {
@@ -213,8 +237,22 @@ public class Tienda2026 {
         }
     }
 //</editor-fold>
-    
+
 //<editor-fold defaultstate="collapsed" desc="PEDIDOS">
+    public String generaIdPedido(String idCliente) {
+        int contador = 0;
+        String nuevoId;
+        for (Pedido p : pedidos) {
+            if (p.getClientePedido().getIdCliente().equalsIgnoreCase(idCliente)) {
+                contador++;
+            }
+        }
+        contador++;
+
+        nuevoId = idCliente + "-" + String.format("%03d", contador) + "/" + LocalDate.now().getYear();
+        return nuevoId;
+    }
+
     private void listadoPedidos() {
         System.out.println("Listado de Pedidos");
         for (Pedido p : pedidos) {
@@ -223,7 +261,27 @@ public class Tienda2026 {
     }
 
     private void nuevoPedido() {
+        String idCliente;
+        do{
+            System.out.println("DNI CLIENTE");
+            idCliente=sc.nextLine().toUpperCase();
+        }while (!MetodosAuxiliares.validarDNI(idCliente));
+        
+        ArrayList <LineaPedido> cestaCompra =new ArrayList();
+        String idArticulo;
+        int unidades=0;
+        do{
+            System.out.println("Teclee el ID del articulo deseado (FIN para terminar la compra)");
+            idArticulo=sc.next();
+            System.out.println("\nTeclea las unidades deseadas: ");
+            unidades=sc.nextInt();
+            cestaCompra.add(new LineaPedido(idArticulo, unidades));
+        }while (!idArticulo.equalsIgnoreCase("FIN"));
+        
+        generaIdPedido(idCliente);
+        Pedido p=new Pedido(generaIdPedido(idCliente), clientes.get(idCliente), LocalDate.now(), cestaCompra);
+        pedidos.add(p);
     }
 //</editor-fold>
-    
+
 }
