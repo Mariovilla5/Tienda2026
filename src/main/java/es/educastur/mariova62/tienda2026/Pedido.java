@@ -59,24 +59,24 @@ public class Pedido {
         this.cestaCompra = cestaCompra;
     }
 
-    /*@Override
+    @Override
     public String toString() {
         return "Pedido [idPedido=" + idPedido + ", clientePedido=" + clientePedido + ", fechaPedido=" + fechaPedido
                 + ", cestaCompra=" + cestaCompra + "]";
-    }*/
-
-    @Override
-    public String toString() {
-        return String.format("""
-        PEDIDO
-        ───────────────────────
-        ID:       %s
-        Cliente:  %s
-        Fecha:    %s
-        Cesta:    %s
-        """,
-                idPedido, clientePedido.getNombre(), fechaPedido, cestaCompra
-        );
     }
+
+//    @Override
+//    public String toString() {
+//        return String.format("""
+//        PEDIDO
+//        ───────────────────────
+//        ID:       %s
+//        Cliente:  %s
+//        Fecha:    %s
+//        Cesta:    %s
+//        """,
+//                idPedido, clientePedido.getNombre(), fechaPedido, cestaCompra
+//        );
+//    }
 
 }

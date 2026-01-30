@@ -54,23 +54,23 @@ public class Articulo {
         this.pvp = pvp;
     }
 
-    /*@Override
+    @Override
     public String toString() {
         return "Articulo [idArticulo=" + idArticulo + ", description=" + description + ", existencias=" + existencias
                 + ", pvp=" + pvp + "]";
-    }*/
-    @Override
-    public String toString() {
-        return String.format("""
-        ARTÍCULO
-        ───────────────────────
-        ID:          %s
-        Descripción: %s
-        Stock:       %d unidades
-        Precio:      %.2f €
-        """,
-                idArticulo, description, existencias, pvp
-        );
     }
+//    @Override
+//    public String toString() {
+//        return String.format("""
+//        ARTÍCULO
+//        ───────────────────────
+//        ID:          %s
+//        Descripción: %s
+//        Stock:       %d unidades
+//        Precio:      %.2f €
+//        """,
+//                idArticulo, description, existencias, pvp
+//        );
+//    }
 
 }
