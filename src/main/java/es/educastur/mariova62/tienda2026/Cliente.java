@@ -54,29 +54,29 @@ public class Cliente {
         this.email = email;
     }
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Cliente{");
-        sb.append("idCliente=").append(idCliente);
-        sb.append(", nombre=").append(nombre);
-        sb.append(", telefono=").append(telefono);
-        sb.append(", email=").append(email);
-        sb.append('}');
-        return sb.toString();
-    }
 //    @Override
 //    public String toString() {
-//        return String.format("""
-//        CLIENTE
-//        ───────────────────────
-//        ID:       %s
-//        Nombre:   %s
-//        Teléfono: %s
-//        Email:    %s
-//        """,
-//                idCliente, nombre, telefono, email
-//        );
+//        StringBuilder sb = new StringBuilder();
+//        sb.append("Cliente{");
+//        sb.append("idCliente=").append(idCliente);
+//        sb.append(", nombre=").append(nombre);
+//        sb.append(", telefono=").append(telefono);
+//        sb.append(", email=").append(email);
+//        sb.append('}');
+//        return sb.toString();
 //    }
+    @Override
+    public String toString() {
+        return String.format("""
+        CLIENTE
+        ───────────────────────
+        ID:       %s
+        Nombre:   %s
+        Teléfono: %s
+        Email:    %s
+        """,
+                idCliente, nombre, telefono, email
+        );
+    }
 
 }

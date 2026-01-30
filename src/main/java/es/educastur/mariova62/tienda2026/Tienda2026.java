@@ -260,87 +260,81 @@ public class Tienda2026 {
         }
     }
 
-    
-    
-    
-    private void stock (String idArticulo, int unidades) throws StockCero, StockInsuficiente {
-        if (articulos.get(idArticulo).getExistencias()==0){
-            throw new StockCero("0 unidades disponibles de: " 
+    private void stock(String idArticulo, int unidades) throws StockCero, StockInsuficiente {
+        if (articulos.get(idArticulo).getExistencias() == 0) {
+            throw new StockCero("0 unidades disponibles de: "
                     + articulos.get(idArticulo).getDescripcion());
         }
-        if (articulos.get(idArticulo).getExistencias() < unidades){
-            throw new StockInsuficiente("Sólo hay" + articulos.get(idArticulo).getExistencias() 
+        if (articulos.get(idArticulo).getExistencias() < unidades) {
+            throw new StockInsuficiente("Sólo hay" + articulos.get(idArticulo).getExistencias()
                     + "unidades disponibles de: " + articulos.get(idArticulo).getDescripcion());
         }
     }
-    
+
     private void nuevoPedido() {
-        
+
         String idCliente;
-        do{
+        do {
             System.out.println("DNI (id) CLIENTE:");
-            idCliente=sc.nextLine().toUpperCase();
-            if (!clientes.containsKey(idCliente)){
-                System.out.println("No es cliente de la tienda."
-                        + " Desea darse de alta o compra como invitado");
+            idCliente = sc.nextLine().toUpperCase();
+            if (!clientes.containsKey(idCliente)) {
+                
             }
-        }while (!MetodosAuxiliares.validarDNI(idCliente));
-        
-        ArrayList <LineaPedido> cestaCompra =new ArrayList();
+        } while (!MetodosAuxiliares.validarDNI(idCliente));
+
+        ArrayList<LineaPedido> cestaCompra = new ArrayList();
         String idArticulo;
-        int unidades=0;
+        int unidades = 0;
         System.out.print("\nTecle el ID del artículo deseado (FIN para terminar la compra)");
-        idArticulo=sc.next();
-        while (!idArticulo.equalsIgnoreCase("FIN")){
+        idArticulo = sc.next();
+        while (!idArticulo.equalsIgnoreCase("FIN")) {
             System.out.print("\nTeclea las unidades deseadas: ");
-            unidades=sc.nextInt();
+            unidades = sc.nextInt();
 
             try {
                 stock(idArticulo, unidades);
-                cestaCompra.add(new LineaPedido(idArticulo,unidades));
+                cestaCompra.add(new LineaPedido(idArticulo, unidades));
             } catch (StockCero ex) {
                 System.out.println(ex.getMessage());
             } catch (StockInsuficiente ex) {
                 System.out.println(ex.getMessage());
                 System.out.println("Las quieres (SI/NO)");
-                String respuesta=sc.next();
-                if (respuesta.equalsIgnoreCase("SI")){
-                    cestaCompra.add(new LineaPedido(idArticulo,articulos.get(idArticulo).getExistencias()));
+                String respuesta = sc.next();
+                if (respuesta.equalsIgnoreCase("SI")) {
+                    cestaCompra.add(new LineaPedido(idArticulo, articulos.get(idArticulo).getExistencias()));
                 }
             }
-            System.out.print("\nTecle el ID del artículo deseado (FIN para terminar la compra)");
-            idArticulo=sc.next();
+            
+            
         }
-        
-        if (!cestaCompra.isEmpty()){
+
+        if (!cestaCompra.isEmpty()) {
             System.out.println("Este es tu pedido");
-            for (LineaPedido l:cestaCompra){
-                System.out.println( l.getIdArticulo()+"-"+ 
-                        articulos.get(l.getIdArticulo()).getDescripcion() + " - " + l.getUnidades() );
+            for (LineaPedido l : cestaCompra) {
+                System.out.println(l.getIdArticulo() + "-"
+                        + articulos.get(l.getIdArticulo()).getDescripcion() + " - " + l.getUnidades());
             }
-            System.out.println("Procedemos con la compra (SI/NO) "); 
-            String respuesta=sc.next();
-            if (respuesta.equalsIgnoreCase("SI")){
+            System.out.println("Procedemos con la compra (SI/NO) ");
+            String respuesta = sc.next();
+            if (respuesta.equalsIgnoreCase("SI")) {
                 pedidos.add(new Pedido(generaIdPedido(idCliente), clientes.get(idCliente),
-                LocalDate.now(), cestaCompra));
-                for (LineaPedido l:cestaCompra){
+                        LocalDate.now(), cestaCompra));
+                for (LineaPedido l : cestaCompra) {
                     articulos.get(l.getIdArticulo())
-                            .setExistencias(articulos.get(l.getIdArticulo()).getExistencias()-l.getUnidades());
+                            .setExistencias(articulos.get(l.getIdArticulo()).getExistencias() - l.getUnidades());
                 }
             }
         }
     }
-
-
-
-
-
-
-
-
-
-
+    
+    
+    private double totalPedido (Pedido p) {
+        double totalP = 0;
+        for (LineaPedido l: p.getCestaCompra()){
+            totalP+= l.getUnidades()* articulos.get(l.getIdArticulo()).getPvp();
+        }
+        return totalP;
+    }
 
 //</editor-fold>
-
 }
