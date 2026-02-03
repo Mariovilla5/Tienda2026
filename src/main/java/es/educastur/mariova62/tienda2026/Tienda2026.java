@@ -276,9 +276,9 @@ public class Tienda2026 {
         String idCliente;
         do {
             System.out.println("DNI (id) CLIENTE:");
-            idCliente = sc.nextLine().toUpperCase();
+             idCliente = sc.nextLine().toUpperCase();
             if (!clientes.containsKey(idCliente)) {
-                
+
             }
         } while (!MetodosAuxiliares.validarDNI(idCliente));
 
@@ -290,7 +290,7 @@ public class Tienda2026 {
         while (!idArticulo.equalsIgnoreCase("FIN")) {
             System.out.print("\nTeclea las unidades deseadas: ");
             unidades = sc.nextInt();
-            
+
             try {
                 stock(idArticulo, unidades);
                 cestaCompra.add(new LineaPedido(idArticulo, unidades));
@@ -303,9 +303,9 @@ public class Tienda2026 {
                 if (respuesta.equalsIgnoreCase("SI")) {
                     cestaCompra.add(new LineaPedido(idArticulo, articulos.get(idArticulo).getExistencias()));
                 }
+                
             }
-            
-            
+
         }
 
         if (!cestaCompra.isEmpty()) {
@@ -323,15 +323,14 @@ public class Tienda2026 {
                     articulos.get(l.getIdArticulo())
                             .setExistencias(articulos.get(l.getIdArticulo()).getExistencias() - l.getUnidades());
                 }
-            }                                                                                                                                                                                           
+            }
         }
     }
-    
-    
-    private double totalPedido (Pedido p) {
+
+    private double totalPedido(Pedido p) {
         double totalP = 0;
-        for (LineaPedido l: p.getCestaCompra()){
-            totalP+= l.getUnidades()* articulos.get(l.getIdArticulo()).getPvp();
+        for (LineaPedido l : p.getCestaCompra()) {
+            totalP += l.getUnidades() * articulos.get(l.getIdArticulo()).getPvp();
         }
         return totalP;
     }
