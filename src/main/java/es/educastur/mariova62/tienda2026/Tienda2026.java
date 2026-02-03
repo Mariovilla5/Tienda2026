@@ -290,7 +290,7 @@ public class Tienda2026 {
         while (!idArticulo.equalsIgnoreCase("FIN")) {
             System.out.print("\nTeclea las unidades deseadas: ");
             unidades = sc.nextInt();
-
+            
             try {
                 stock(idArticulo, unidades);
                 cestaCompra.add(new LineaPedido(idArticulo, unidades));
@@ -323,7 +323,7 @@ public class Tienda2026 {
                     articulos.get(l.getIdArticulo())
                             .setExistencias(articulos.get(l.getIdArticulo()).getExistencias() - l.getUnidades());
                 }
-            }
+            }                                                                                                                                                                                           
         }
     }
     
